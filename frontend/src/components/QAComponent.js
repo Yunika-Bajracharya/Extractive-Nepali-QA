@@ -9,19 +9,18 @@ const QAComponent = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const handleSubmit = async () => {
+  const handleGetAnswer = async () => {
     setLoading(true);
     setError("");
 
-    try {
-      // const response = await axios.post("API_ENDPOINT", {
-      //   context,
-      //   question,
-      // });
-      // setAnswer(response.data.answer);
+    const data = {
+      context: context,
+      question: question,
+    };
 
-      const temporaryAnswer = "This is a temporary answer.";
-      setAnswer(temporaryAnswer);
+    try {
+      const response = await axios.post("http://127.0.0.1:8000/answer", data);
+      setAnswer(response.data.answer.answer);
     } catch (err) {
       setError("Failed to fetch answer. Please try again.");
     } finally {
@@ -35,7 +34,7 @@ const QAComponent = () => {
         <h1>Nepali Question Answering System</h1>
       </header>
       <section className="input-section">
-        <p className="input-section-heading">Context</p>
+        <p className="input-section-heading">Context Text / Document Upload</p>
         <textarea
           className="context-field"
           placeholder="Enter context paragraph"
@@ -58,7 +57,7 @@ const QAComponent = () => {
         />
         <button
           className="submit-btn"
-          onClick={handleSubmit}
+          onClick={handleGetAnswer}
           disabled={loading}
         >
           {loading ? "Loading..." : "Submit"}
