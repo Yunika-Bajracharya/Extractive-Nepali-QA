@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from transformers import pipeline
+import uvicorn
 
 app = FastAPI()
 
@@ -24,3 +25,6 @@ async def get_answer(qa_request: QARequest):
     answer = qa_pipeline(question=qa_request.question, context=qa_request.context)
 
     return {"answer": answer}
+
+if __name__ == "__main__":
+   uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)

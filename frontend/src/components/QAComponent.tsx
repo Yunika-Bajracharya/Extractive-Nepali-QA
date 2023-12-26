@@ -3,11 +3,11 @@ import axios from "axios";
 import "./QAComponent.css";
 
 const QAComponent = () => {
-  const [context, setContext] = useState("");
-  const [question, setQuestion] = useState("");
-  const [answer, setAnswer] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [context, setContext] = useState<string>("");
+  const [question, setQuestion] = useState<string>("");
+  const [answer, setAnswer] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string>("");
 
   const handleGetAnswer = async () => {
     setLoading(true);
@@ -43,8 +43,9 @@ const QAComponent = () => {
           rows={1}
           style={{ minHeight: "100px" }}
           onInput={(e) => {
-            e.target.style.height = "auto";
-            e.target.style.height = `${e.target.scrollHeight}px`;
+            const target = e.target as HTMLTextAreaElement;
+            target.style.height = "auto";
+            target.style.height = `${target.scrollHeight}px`;
           }}
         />
         <p className="input-section-heading">Question</p>
