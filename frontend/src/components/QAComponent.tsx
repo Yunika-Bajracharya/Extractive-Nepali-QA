@@ -8,6 +8,8 @@ const QAComponent = () => {
   const [answer, setAnswer] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
+  const [isDocumentUpload, setIsDocumentUpload] = useState<boolean>(false);
+  const [file, setFile] = useState<File | null>(null);
 
   const handleGetAnswer = async () => {
     setLoading(true);
@@ -28,26 +30,91 @@ const QAComponent = () => {
     }
   };
 
+  const handleFileInputChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    if (event.target.files) {
+      setFile(event.target.files[0]);
+    }
+  };
+
+  const handleFileUpload = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const formData = new FormData();
+    file && formData.append("file_upload", file);
+
+    try {
+      const fileupload_endpoint = "http://127.0.0.1:8000/uploadfile/";
+
+      const response = await fetch(fileupload_endpoint, {
+        method: "POST",
+        body: formData,
+      });
+
+      if (response.ok) {
+        console.log("File upload success");
+      } else {
+        console.log("Failed to upload file");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="container">
       <header>
         <h1>Nepali Question Answering System</h1>
       </header>
       <section className="input-section">
-        <p className="input-section-heading">Context Text / Document Upload</p>
-        <textarea
-          className="context-field"
-          placeholder="Enter context paragraph"
-          value={context}
-          onChange={(e) => setContext(e.target.value)}
-          rows={1}
-          style={{ minHeight: "100px" }}
-          onInput={(e) => {
-            const target = e.target as HTMLTextAreaElement;
-            target.style.height = "auto";
-            target.style.height = `${target.scrollHeight}px`;
-          }}
-        />
+        <div>
+          <button
+            className={`input-section-button ${
+              !isDocumentUpload ? "blue" : ""
+            }`}
+            onClick={() => {
+              setIsDocumentUpload(false);
+            }}
+          >
+            Context Text
+          </button>
+          <button
+            className={`input-section-button ${isDocumentUpload ? "blue" : ""}`}
+            onClick={() => setIsDocumentUpload(true)}
+          >
+            Document Upload
+          </button>
+        </div>
+
+        {!isDocumentUpload ? (
+          <textarea
+            className="context-field"
+            placeholder="Enter context paragraph"
+            value={context}
+            onChange={(e) => setContext(e.target.value)}
+            rows={1}
+            style={{ minHeight: "100px" }}
+            onInput={(e) => {
+              const target = e.target as HTMLTextAreaElement;
+              target.style.height = "auto";
+              target.style.height = `${target.scrollHeight}px`;
+            }}
+          />
+        ) : (
+          <div className="fileupload-section">
+            <form onSubmit={handleFileUpload}>
+              <input
+                type="file"
+                onChange={handleFileInputChange}
+                className="fileupload-input"
+              />
+              <button type="submit" className="fileupload-submit">
+                Upload
+              </button>
+            </form>
+          </div>
+        )}
         <p className="input-section-heading">Question</p>
         <input
           className="input-field"
