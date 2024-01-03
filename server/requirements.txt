@@ -1,0 +1,6 @@
+transformers
+pydantic
+fastapi
+uvicorn[standard]
+python-multipart
+snowballstemmer

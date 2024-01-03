@@ -2,14 +2,23 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./QAComponent.css";
 
+enum InputType {
+  ContextText = 1,
+  DocumentUpload,
+  WebsiteLink,
+}
+
+const API_ENDPOINT = "http://127.0.0.1:8000"
+
 const QAComponent = () => {
   const [context, setContext] = useState<string>("");
   const [question, setQuestion] = useState<string>("");
   const [answer, setAnswer] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
-  const [isDocumentUpload, setIsDocumentUpload] = useState<boolean>(false);
   const [file, setFile] = useState<File | null>(null);
+  const [inputType, setInputType] = useState<InputType>(InputType.ContextText);
+  const [websiteLink, setWebsiteLink] = useState<string>("");
 
   const handleGetAnswer = async () => {
     setLoading(true);
@@ -21,7 +30,7 @@ const QAComponent = () => {
     };
 
     try {
-      const response = await axios.post("http://127.0.0.1:8000/answer", data);
+      const response = await axios.post(API_ENDPOINT + "/answer", data);
       setAnswer(response.data.answer.answer);
     } catch (err) {
       setError("Failed to fetch answer. Please try again.");
@@ -45,7 +54,7 @@ const QAComponent = () => {
     file && formData.append("file_upload", file);
 
     try {
-      const fileupload_endpoint = "http://127.0.0.1:8000/uploadfile/";
+      const fileupload_endpoint = API_ENDPOINT + "/uploadfile/";
 
       const response = await fetch(fileupload_endpoint, {
         method: "POST",
@@ -71,23 +80,33 @@ const QAComponent = () => {
         <div>
           <button
             className={`input-section-button ${
-              !isDocumentUpload ? "blue" : ""
+              inputType == InputType.ContextText ? "blue" : ""
             }`}
             onClick={() => {
-              setIsDocumentUpload(false);
+              setInputType(InputType.ContextText);
             }}
           >
             Context Text
           </button>
           <button
-            className={`input-section-button ${isDocumentUpload ? "blue" : ""}`}
-            onClick={() => setIsDocumentUpload(true)}
+            className={`input-section-button ${
+              inputType == InputType.DocumentUpload ? "blue" : ""
+            }`}
+            onClick={() => setInputType(InputType.DocumentUpload)}
           >
             Document Upload
           </button>
+          <button
+            className={`input-section-button ${
+              inputType == InputType.WebsiteLink ? "blue" : ""
+            }`}
+            onClick={() => setInputType(InputType.WebsiteLink)}
+          >
+            Website Link
+          </button>
         </div>
 
-        {!isDocumentUpload ? (
+        {inputType == InputType.ContextText && (
           <textarea
             className="context-field"
             placeholder="Enter context paragraph"
@@ -101,7 +120,8 @@ const QAComponent = () => {
               target.style.height = `${target.scrollHeight}px`;
             }}
           />
-        ) : (
+        )}
+        {inputType == InputType.DocumentUpload && (
           <div className="fileupload-section">
             <form onSubmit={handleFileUpload}>
               <input
@@ -114,6 +134,17 @@ const QAComponent = () => {
               </button>
             </form>
           </div>
+        )}
+        {inputType == InputType.WebsiteLink && (
+          <>
+            <input
+              className="input-field"
+              type="text"
+              placeholder="Enter website link"
+              value={websiteLink}
+              onChange={(e) => setWebsiteLink(e.target.value)}
+            />
+          </>
         )}
         <p className="input-section-heading">Question</p>
         <input
