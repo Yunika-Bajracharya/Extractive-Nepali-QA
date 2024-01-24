@@ -8,7 +8,7 @@ enum InputType {
   WebsiteLink,
 }
 
-const API_ENDPOINT = "http://127.0.0.1:8000"
+const API_ENDPOINT = "http://127.0.0.1:8000";
 
 const QAComponent = () => {
   const [context, setContext] = useState<string>("");
@@ -40,7 +40,7 @@ const QAComponent = () => {
   };
 
   const handleFileInputChange = (
-    event: React.ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     if (event.target.files) {
       setFile(event.target.files[0]);
