@@ -27,7 +27,7 @@ const QAComponent = () => {
     const data = {
       context: context,
       question: question,
-      file: file ? file.name : "",
+      fileName: file ? file.name : "",
     };
 
     try {

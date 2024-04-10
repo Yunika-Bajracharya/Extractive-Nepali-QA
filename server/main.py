@@ -29,11 +29,10 @@ qa_pipeline = pipeline("question-answering", model="suban244/muRIL-squad-nep-hi-
 
 class QRequest(BaseModel):
     question: str
+    
 
 class QWithContext(QRequest):
     context: str
-    
-class QWithDocument(QRequest):
     fileName: str
 
 class QWithUrl(QRequest):
@@ -51,7 +50,6 @@ def extract_text_from_pdf(file_path):
 
 @app.post("/answer")
 async def get_answer(qa_request: QWithContext):
-    
     if qa_request.fileName:
         file_path = UPLOAD_DIR / qa_request.fileName
         pdf_text = extract_text_from_pdf(file_path)
