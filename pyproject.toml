@@ -1,0 +1,32 @@
+[tool.poetry]
+name = "nepqa"
+version = "0.1.0"
+description = ""
+authors = ["Suban Shrestha <subanshrestha244@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pandas = "^2.2.1"
+openpyxl = "^3.1.2"
+termcolor = "^2.4.0"
+fastapi = "^0.110.1"
+uvicorn = {extras = ["standard"], version = "^0.29.0"}
+transformers = "^4.39.3"
+torch = {version = "^2.2.2+cpu", source = "pytorch_cpu"}
+python-multipart = "^0.0.9"
+bs4 = "^0.0.2"
+
+
+[tool.poetry.group.dev.dependencies]
+ipykernel = "^6.29.3"
+
+
+[[tool.poetry.source]]
+name = "pytorch_cpu"
+url = "https://download.pytorch.org/whl/cpu"
+priority = "explicit"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
