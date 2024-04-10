@@ -119,6 +119,7 @@ h1 {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   border: none;
   font-size: 20px;
+  width: 100%;
 }
 
 .submit-btn {
