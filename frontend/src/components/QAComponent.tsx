@@ -27,6 +27,7 @@ const QAComponent = () => {
     const data = {
       context: context,
       question: question,
+      file: file ? file.name : "",
     };
 
     try {
@@ -40,7 +41,7 @@ const QAComponent = () => {
   };
 
   const handleFileInputChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
+    event: React.ChangeEvent<HTMLInputElement>
   ) => {
     if (event.target.files) {
       setFile(event.target.files[0]);
@@ -84,6 +85,7 @@ const QAComponent = () => {
             }`}
             onClick={() => {
               setInputType(InputType.ContextText);
+              setFile(null);
             }}
           >
             Context Text
@@ -92,7 +94,10 @@ const QAComponent = () => {
             className={`input-section-button ${
               inputType == InputType.DocumentUpload ? "blue" : ""
             }`}
-            onClick={() => setInputType(InputType.DocumentUpload)}
+            onClick={() => {
+              setInputType(InputType.DocumentUpload);
+              setContext("");
+            }}
           >
             Document Upload
           </button>
