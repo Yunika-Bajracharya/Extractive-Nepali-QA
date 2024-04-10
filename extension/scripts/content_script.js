@@ -5,15 +5,21 @@
         (obj, sender, res) => {
             const { type, textToHighlight } = obj;
             console.log(type, textToHighlight)
-            node = searchDOMForString(document.body, textToHighlight)
+
+            news_body = document.getElementsByClassName("description current-news-block")
+            node = searchDOMForString(news_body[0], textToHighlight)
+            if (!node){
+                node = searchDOMForString(document.body, textToHighlight)
+            }
+
             if (node) {
                 const success = highlightText(node, textToHighlight, "highlight")
-                console.log(success)
                 if (success) {
-                    node.scrollIntoView({ behavior: "smooth" });
+                    console.log(node)
+                    node.scrollIntoView({ behavior: "smooth" , block: "center"});
+                    // window.scroll({top: window.innerHeight / 2, behavior: "smooth"})
                     if (highlightedEl) {
-                        // clear highlight
-                        clearHighlight(node, "highlight");
+                        clearHighlight(highlightedEl, "highlight");
                     }
                     highlightedEl = node
 
@@ -28,8 +34,6 @@
 })();
 
 
-
-
 /**
  * Searches the DOM starting from the root element for a specific string.
  *
@@ -38,9 +42,9 @@
  * @return {Node|null} The parent node that contains the searched string, or null if not found
  */
 function searchDOMForString(root, searchString) {
-    var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null, false);
+    let walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null, false);
     while (walker.nextNode()) {
-        var node = walker.currentNode;
+        let node = walker.currentNode;
         if (node.textContent.includes(searchString)) {
             return node.parentNode
         }
@@ -67,6 +71,12 @@ function highlightText(element, textToHighlight, style) {
     }
 }
 
+/**
+ * Clears the highlighted elements with the specified style within the given element.
+ *
+ * @param {Element} element - The element containing the highlighted elements to be cleared.
+ * @param {string} style - The CSS class style of the highlighted elements to be cleared.
+ */
 function clearHighlight(element, style) {
     const highlightedElements = element.querySelectorAll(`span.${style}`);
     highlightedElements.forEach(highlightedElement => {

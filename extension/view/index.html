@@ -5,8 +5,11 @@
 <body>
     <div class="search-container">
         <hi class="title">NepQA</hi>
-        <input type="text" id="searchBox" placeholder="Ask a question...">
+        <!-- <input type="text" id="searchBox" placeholder="Ask a question..."> -->
+        <textarea id="searchBox" rows="1"></textarea>
         <button id="searchButton">Search</button>
+        <div id="loading" style="display: none;">Loading...</div>
+        <div id="answer"></div>
     </div>
     <script src="../scripts/search.js"></script>
 </body>
