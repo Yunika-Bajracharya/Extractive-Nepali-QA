@@ -21,6 +21,10 @@ body {
   border-radius: 10px;
 }
 
+.transliteration-container {
+  width: 1100px;
+}
+
 header {
   text-align: center;
   margin-bottom: 50px;
@@ -49,6 +53,19 @@ h1 {
   /* background-color: #e8f4fa; */
   cursor: pointer;
   color: #063656;
+}
+
+.question-input-button {
+  display: inline-block;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  width: 150px;
+  height: 35px;
+  border-radius: 10px;
+  border: 1px solid #116f3e;
+  /* background-color: #e8f4fa; */
+  cursor: pointer;
+  color: #7e2279;
 }
 
 .blue {
@@ -119,6 +136,7 @@ h1 {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   border: none;
   font-size: 20px;
+  width: 100%;
 }
 
 .submit-btn {

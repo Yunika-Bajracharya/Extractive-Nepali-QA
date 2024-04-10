@@ -2,10 +2,19 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./QAComponent.css";
 
+import { ReactTransliterate, Language } from "react-transliterate";
+import "react-transliterate/dist/index.css";
+
+
 enum InputType {
   ContextText = 1,
   DocumentUpload,
   WebsiteLink,
+}
+
+enum QuestionInput {
+  Default = 1,
+  NeplaiTranliteration,
 }
 
 const API_ENDPOINT = "http://127.0.0.1:8000";
@@ -19,6 +28,12 @@ const QAComponent = () => {
   const [file, setFile] = useState<File | null>(null);
   const [inputType, setInputType] = useState<InputType>(InputType.ContextText);
   const [websiteLink, setWebsiteLink] = useState<string>("");
+
+  // Transliteration states
+  const [text, setText] = useState("");
+  const [lang, setLang] = useState<Language>("ne");
+
+  const [questionInput, setQuestionInput] = useState<QuestionInput>(QuestionInput.Default);
 
   const handleGetAnswer = async () => {
     setLoading(true);
@@ -147,13 +162,48 @@ const QAComponent = () => {
           </>
         )}
         <p className="input-section-heading">Question</p>
-        <input
+        <div>
+        <button
+            className={`input-section-button ${
+              questionInput == QuestionInput.Default ? "blue" : ""
+            }`}
+            onClick={() => setQuestionInput(QuestionInput.Default)}
+          >
+            Default
+          </button>
+        <button
+            className={`input-section-button ${
+              questionInput == QuestionInput.NeplaiTranliteration ? "blue" : ""
+            }`}
+            onClick={() => setQuestionInput(QuestionInput.NeplaiTranliteration)}
+          >
+            Nepali Transliteration
+          </button>
+          </div>
+          
+        {questionInput == QuestionInput.Default && (
+          <input
           className="input-field"
           type="text"
           placeholder="Enter your question"
           value={question}
           onChange={(e) => setQuestion(e.target.value)}
         />
+        )}
+        {questionInput == QuestionInput.NeplaiTranliteration && (
+        <ReactTransliterate
+        renderComponent={(props) => <input className="input-field"  {...props} />}
+        value={text}
+        placeholder="Enter you question in romanized nepali"
+        onChangeText={(text) => {
+          setText(text);
+        }}
+        lang={lang}
+        className="input-field"
+        containerClassName="transliteration-container"
+        
+      />
+        )}
         <button
           className="submit-btn"
           onClick={handleGetAnswer}
