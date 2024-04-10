@@ -7,6 +7,13 @@ textarea.addEventListener('input', function() {
     this.rows = this.scrollHeight / this.style.lineHeight.replace('px','');
 });
 
+textarea.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+        event.preventDefault(); 
+        searchButton.click();
+    }
+});
+
 document.getElementById("searchButton").addEventListener("click", (e) => {
   clearAnswerBlock()
   e.preventDefault()
