@@ -21,10 +21,6 @@ body {
   border-radius: 10px;
 }
 
-.transliteration-container {
-  width: 1100px;
-}
-
 header {
   text-align: center;
   margin-bottom: 50px;
@@ -53,19 +49,6 @@ h1 {
   /* background-color: #e8f4fa; */
   cursor: pointer;
   color: #063656;
-}
-
-.question-input-button {
-  display: inline-block;
-  margin-right: 10px;
-  margin-bottom: 10px;
-  width: 150px;
-  height: 35px;
-  border-radius: 10px;
-  border: 1px solid #116f3e;
-  /* background-color: #e8f4fa; */
-  cursor: pointer;
-  color: #7e2279;
 }
 
 .blue {

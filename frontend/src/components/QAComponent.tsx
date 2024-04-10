@@ -3,8 +3,7 @@ import axios from "axios";
 import "./QAComponent.css";
 
 import { ReactTransliterate, Language } from "react-transliterate";
-import "react-transliterate/dist/index.css";
-
+// import "react-transliterate/dist/index.css";
 
 enum InputType {
   ContextText = 1,
@@ -14,7 +13,7 @@ enum InputType {
 
 enum QuestionInput {
   Default = 1,
-  NeplaiTranliteration,
+  NepaliTranliteration,
 }
 
 const API_ENDPOINT = "http://127.0.0.1:8000";
@@ -33,7 +32,9 @@ const QAComponent = () => {
   const [text, setText] = useState("");
   const [lang, setLang] = useState<Language>("ne");
 
-  const [questionInput, setQuestionInput] = useState<QuestionInput>(QuestionInput.Default);
+  const [questionInput, setQuestionInput] = useState<QuestionInput>(
+    QuestionInput.Default
+  );
 
   const handleGetAnswer = async () => {
     setLoading(true);
@@ -55,7 +56,7 @@ const QAComponent = () => {
   };
 
   const handleFileInputChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
+    event: React.ChangeEvent<HTMLInputElement>
   ) => {
     if (event.target.files) {
       setFile(event.target.files[0]);
@@ -161,9 +162,11 @@ const QAComponent = () => {
             />
           </>
         )}
+
         <p className="input-section-heading">Question</p>
+
         <div>
-        <button
+          <button
             className={`input-section-button ${
               questionInput == QuestionInput.Default ? "blue" : ""
             }`}
@@ -171,38 +174,41 @@ const QAComponent = () => {
           >
             Default
           </button>
-        <button
+
+          <button
             className={`input-section-button ${
-              questionInput == QuestionInput.NeplaiTranliteration ? "blue" : ""
+              questionInput == QuestionInput.NepaliTranliteration ? "blue" : ""
             }`}
-            onClick={() => setQuestionInput(QuestionInput.NeplaiTranliteration)}
+            onClick={() => setQuestionInput(QuestionInput.NepaliTranliteration)}
           >
             Nepali Transliteration
           </button>
-          </div>
-          
+        </div>
+
         {questionInput == QuestionInput.Default && (
           <input
-          className="input-field"
-          type="text"
-          placeholder="Enter your question"
-          value={question}
-          onChange={(e) => setQuestion(e.target.value)}
-        />
+            className="input-field"
+            type="text"
+            placeholder="Enter your question"
+            value={question}
+            onChange={(e) => setQuestion(e.target.value)}
+          />
         )}
-        {questionInput == QuestionInput.NeplaiTranliteration && (
-        <ReactTransliterate
-        renderComponent={(props) => <input className="input-field"  {...props} />}
-        value={text}
-        placeholder="Enter you question in romanized nepali"
-        onChangeText={(text) => {
-          setText(text);
-        }}
-        lang={lang}
-        className="input-field"
-        containerClassName="transliteration-container"
-        
-      />
+
+        {questionInput == QuestionInput.NepaliTranliteration && (
+          <ReactTransliterate
+            renderComponent={(props: any) => (
+              <input className="input-field" {...props} />
+            )}
+            value={text}
+            placeholder="Enter your question in romanized Nepali"
+            onChangeText={(text: string) => {
+              setText(text);
+              setQuestion(text);
+            }}
+            lang={lang}
+            className="input-field"
+          />
         )}
         <button
           className="submit-btn"
