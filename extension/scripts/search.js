@@ -1,11 +1,40 @@
 const fetch_url = "http://localhost:8000/scrape_search"
 
+
+let doTransliteration = false
+let input_content = ""
+const transliterationButton = document.getElementById("transliterate")
+// addAnswerToBlock(Sanscript.t("namaste", "hk", "devanagari"))
+
+
 const textarea = document.getElementById("searchBox")
 textarea.focus()
-textarea.addEventListener('input', function() {
+textarea.addEventListener('input', function(event) {
+    console.log(event)
+
+    if (doTransliteration){
+        event.preventDefault()
+      if (event.inputType == "insertText"){
+        input_content += event.data
+        let newText = Sanscript.t(input_content, "hk", "devanagari")
+        textarea.value = newText
+      }
+      else if (event.inputType == "deleteContentBackward"){
+        input_content = input_content.slice(0, -1)
+        let newText = Sanscript.t(input_content, "hk", "devanagari")
+        textarea.value = newText
+      }
+      else if (event.inputType == "insertFromPaste"){
+        // NOt handled yet
+      }
+    }
+
+    // Update block size
     this.rows = 1; // reset the number of rows
     this.rows = this.scrollHeight / this.style.lineHeight.replace('px','');
 });
+
+
 
 textarea.addEventListener('keydown', function(event) {
     if (event.key === 'Enter') {
@@ -13,6 +42,23 @@ textarea.addEventListener('keydown', function(event) {
         searchButton.click();
     }
 });
+
+
+// Transliteration
+transliterationButton.addEventListener("click", (e) => {
+  // Just toggle between states
+  if (doTransliteration) {
+    transliterationButton.innerText = "Nep -> ने"
+  }
+  else {
+    transliterationButton.innerText = "Eng"
+  }
+  doTransliteration = ! doTransliteration
+  textarea.value = ""
+  input_content = ""
+  textarea.focus()
+})
+
 
 document.getElementById("searchButton").addEventListener("click", (e) => {
   clearAnswerBlock()
@@ -79,6 +125,7 @@ function addAnswerToBlock(answer){
   if (el){
     el.innerHTML = answer
   }
+  console.log(answer)
 }
 /**
  * Clears the answer block by removing its inner HTML content.
