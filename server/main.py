@@ -4,8 +4,11 @@ from pydantic import BaseModel
 from transformers import pipeline
 from pathlib import Path
 import uvicorn
+# import fitz  # PyMuPDF
 # import pdfplumber
-from pdfminer.high_level import extract_text
+# from pdfminer.high_level import extract_text
+import pytesseract
+from pdf2image import convert_from_path
 
 # from DocSearch import BM25Search
 from Scraper import scrape_from_url
@@ -44,9 +47,24 @@ def extract_text_from_pdf(file_path):
     # with pdfplumber.open(file_path) as pdf:
     #     for page in pdf.pages:
     #         text += page.extract_text()
-    text = extract_text(file_path)
+    
+    # PDF Miner
+    # text = extract_text(file_path)
             
-    return text
+    # return text
+
+    pages = convert_from_path(file_path, 500)  # 500 dpi for higher quality conversion
+
+    full_text = ""
+
+    for page in pages:
+        # Extract text from the image using Tesseract
+        text = pytesseract.image_to_string(page, lang='nep')
+
+        # Append the text to the full text string
+        full_text += text
+
+    return(full_text)
 
 @app.post("/answer")
 async def get_answer(qa_request: QWithContext):
