@@ -1,16 +1,22 @@
 <html>
-    <head>
-        <link rel="stylesheet" href="styles.css">
-    </head>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
 <body>
     <div class="search-container">
         <hi class="title">NepQA</hi>
+        <button id="transliterate">Nep -> ने</button>
         <!-- <input type="text" id="searchBox" placeholder="Ask a question..."> -->
         <textarea id="searchBox" rows="1"></textarea>
         <button id="searchButton">Search</button>
         <div id="loading" style="display: none;">Loading...</div>
         <div id="answer"></div>
     </div>
+    <script src="../node_modules/@indic-transliteration/sanscript/sanscript.js"> </script>
     <script src="../scripts/search.js"></script>
 </body>
+
 </html>

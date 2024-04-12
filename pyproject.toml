@@ -16,6 +16,8 @@ transformers = "^4.39.3"
 torch = {version = "^2.2.2+cpu", source = "pytorch_cpu"}
 python-multipart = "^0.0.9"
 bs4 = "^0.0.2"
+pdfminer = "^20191125"
+pdfminer-six = "^20231228"
 
 
 [tool.poetry.group.dev.dependencies]
