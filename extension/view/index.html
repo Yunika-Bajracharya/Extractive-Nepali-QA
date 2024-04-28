@@ -1,22 +1,36 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NeQuery</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <img src="../images/NeQuery1.png" alt="Logo" width="150px" />
+        <!-- <h2>Navigate through Nepali content with ease</h2> -->
+      </header>
+      <main>
+        <div class="search-container">
+          <div class="input-section">
+            <textarea
+              id="searchBox"
+              rows="1"
+              placeholder="Ask your query..."
+              class="input"
+            ></textarea>
+            <button id="transliterate">ने</button>
+          </div>
 
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="styles.css">
-</head>
-
-<body>
-    <div class="search-container">
-        <hi class="title">NepQA</hi>
-        <button id="transliterate">Nep -> ने</button>
-        <!-- <input type="text" id="searchBox" placeholder="Ask a question..."> -->
-        <textarea id="searchBox" rows="1"></textarea>
-        <button id="searchButton">Search</button>
-        <div id="loading" style="display: none;">Loading...</div>
-        <div id="answer"></div>
+          <button id="searchButton">Search</button>
+          <div id="loading" style="display: none">Loading...</div>
+          <div id="answer"></div>
+        </div>
+      </main>
     </div>
-    <script src="../node_modules/@indic-transliteration/sanscript/sanscript.js"> </script>
+    <script src="../node_modules/@indic-transliteration/sanscript/sanscript.js"></script>
     <script src="../scripts/search.js"></script>
-</body>
-
+  </body>
 </html>
