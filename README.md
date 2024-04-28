@@ -1,1 +1,5 @@
-# NepQA
+# Extractive Nepali Question Answering System
+
+There is noticeable gap in language processing tools and resources for Nepali, a language spoken by millions yet significantly underrepresented in the field of computational linguistics. Understanding this gap, we have developed a web application and a browser extension that lets you ask questions in Nepali and get answers extracted from your documents or information on the web. Recognizing the scarcity of dedicated Nepali datasets, the existing dataset is utilized by translating them to Nepali. Traditional translation methods often fail to maintain the integrity of answer spans, so we have introduced a novel translation approach for obtaining training data for Nepali language and leveraging multilingual translation data of Indo-Aryan languages to boost the performance of models with the aim to leverage the benefits of same language family. This method helped in preserving context and meaning across languages, offering a scalable model for multilingual dataset creation. Whether it’s students looking up facts for school or professionals searching for news and updates, our project aims to create easier access to information, thereby empowering Nepali speakers to thrive in the digital age.
+
+### [Demo](https://youtu.be/aHDpSnkGzfE?feature=shared)
