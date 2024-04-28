@@ -80,7 +80,7 @@ h1 {
 }
 
 .fileupload-section {
-  height: 120px;
+  height: 130px;
   margin-bottom: 20px;
   border-radius: 4px;
   border: 1px dashed rgb(211, 211, 211);
@@ -91,22 +91,24 @@ h1 {
 .fileupload-form {
   align-items: center;
   text-align: center;
-  margin-top: 20px;
+  margin-top: 35px;
+  vertical-align: center;
 }
 
 .file-upload-label {
   display: inline-block;
   padding: 12px 20px;
-  background-color: #52afdd;
-  color: #fff;
+  background-color: #dce9f2;
+  color: black;
   border-radius: 6px;
   cursor: pointer;
   transition: background-color 0.3s ease;
   margin-right: 20px;
+  box-shadow: 2px 2px #4e96c0;
 }
 
 .file-upload-label:hover {
-  background-color: #4e96c0;
+  background-color: #d4e3ec;
 }
 
 .file-upload-input {
@@ -119,31 +121,31 @@ h1 {
   color: black;
   border-radius: 6px;
   border: none;
-  border: 1px solid #063656;
+  /* border: 1px solid #063656; */
   cursor: pointer;
   transition: background-color 0.3s ease;
   margin-right: 20px;
-  box-shadow: 3px 3px gray;
+  box-shadow: 2px 2px gray;
 }
 
 .fileupload-submit:hover {
-  font-weight: 900;
+  font-weight: 600;
   color: #0278b1;
-  border: 1px solid #0278b1;
-  box-shadow: 3px 3px #0278b1;
+  box-shadow: 2px 2px #0278b1;
 }
 
 .uploaded-submit-button {
-  background-color: rgb(195, 244, 195);
+  background-color: #dce9f2;
   display: inline-block;
   padding: 12px 20px;
   color: black;
   border-radius: 6px;
   border: none;
-  border: 1px solid #063656;
+  color: #0278b1;
+  font-weight: 600;
   transition: background-color 0.3s ease;
   margin-right: 20px;
-  box-shadow: 3px 3px gray;
+  box-shadow: 2px 2px #0278b1;
 }
 
 .file-upload-info {
@@ -151,12 +153,11 @@ h1 {
 }
 
 .file-upload-info span {
-  font-weight: bold;
+  font-weight: 500;
 }
 
 .upload-success-message {
   color: green;
-  /* margin-top: 10px; */
 }
 
 .input-field {
