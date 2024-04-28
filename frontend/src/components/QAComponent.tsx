@@ -6,8 +6,8 @@ import { ReactTransliterate, Language } from "react-transliterate";
 // import "react-transliterate/dist/index.css";
 
 enum InputType {
-  ContextText = 1,
-  DocumentUpload,
+  DocumentUpload = 1,
+  ContextText,
   WebsiteLink,
 }
 
@@ -25,8 +25,11 @@ const QAComponent = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
   const [file, setFile] = useState<File | null>(null);
-  const [inputType, setInputType] = useState<InputType>(InputType.ContextText);
+  const [inputType, setInputType] = useState<InputType>(
+    InputType.DocumentUpload
+  );
   const [websiteLink, setWebsiteLink] = useState<string>("");
+  const [uploadSuccess, setUploadSuccess] = useState<boolean>(false);
 
   // Transliteration states
   const [text, setText] = useState("");
@@ -80,6 +83,7 @@ const QAComponent = () => {
 
       if (response.ok) {
         console.log("File upload success");
+        setUploadSuccess(true);
       } else {
         console.log("Failed to upload file");
       }
@@ -91,21 +95,10 @@ const QAComponent = () => {
   return (
     <div className="container">
       <header>
-        <h1>Nepali Question Answering System</h1>
+        <h1>Extractive Nepali Question Answering System</h1>
       </header>
       <section className="input-section">
         <div>
-          <button
-            className={`input-section-button ${
-              inputType == InputType.ContextText ? "blue" : ""
-            }`}
-            onClick={() => {
-              setInputType(InputType.ContextText);
-              setFile(null);
-            }}
-          >
-            Context Text
-          </button>
           <button
             className={`input-section-button ${
               inputType == InputType.DocumentUpload ? "blue" : ""
@@ -119,13 +112,55 @@ const QAComponent = () => {
           </button>
           <button
             className={`input-section-button ${
+              inputType == InputType.ContextText ? "blue" : ""
+            }`}
+            onClick={() => {
+              setInputType(InputType.ContextText);
+              setFile(null);
+              setUploadSuccess(false);
+            }}
+          >
+            Context Text
+          </button>
+          {/* <button
+            className={`input-section-button ${
               inputType == InputType.WebsiteLink ? "blue" : ""
             }`}
             onClick={() => setInputType(InputType.WebsiteLink)}
           >
             Website Link
-          </button>
+          </button> */}
         </div>
+
+        {inputType === InputType.DocumentUpload && (
+          <div className="fileupload-section">
+            <form onSubmit={handleFileUpload} className="fileupload-form">
+              <label htmlFor="file-upload" className="file-upload-label">
+                <span className="file-upload-icon">+</span> Choose File
+              </label>
+              <input
+                type="file"
+                id="file-upload"
+                onChange={handleFileInputChange}
+                className="file-upload-input"
+                onClick={() => setUploadSuccess(false)}
+              />
+              <button
+                type="submit"
+                className={
+                  uploadSuccess ? "uploaded-submit-button" : "fileupload-submit"
+                }
+              >
+                {uploadSuccess ? "File Uploaded" : "Upload"}
+              </button>
+            </form>
+            {file && (
+              <p className="file-upload-info">
+                Selected file: <span>{file.name}</span>
+              </p>
+            )}
+          </div>
+        )}
 
         {inputType == InputType.ContextText && (
           <textarea
@@ -142,20 +177,7 @@ const QAComponent = () => {
             }}
           />
         )}
-        {inputType == InputType.DocumentUpload && (
-          <div className="fileupload-section">
-            <form onSubmit={handleFileUpload}>
-              <input
-                type="file"
-                onChange={handleFileInputChange}
-                className="fileupload-input"
-              />
-              <button type="submit" className="fileupload-submit">
-                Upload
-              </button>
-            </form>
-          </div>
-        )}
+
         {inputType == InputType.WebsiteLink && (
           <>
             <input
