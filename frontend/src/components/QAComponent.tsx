@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./QAComponent.css";
 
-import { ReactTransliterate, Language } from "react-transliterate";
+import { ReactTransliterate } from "react-transliterate";
 // import "react-transliterate/dist/index.css";
 
 enum InputType {
@@ -33,7 +33,7 @@ const QAComponent = () => {
 
   // Transliteration states
   const [text, setText] = useState("");
-  const [lang, setLang] = useState<Language>("ne");
+  const lang = "ne";
 
   const [questionInput, setQuestionInput] = useState<QuestionInput>(
     QuestionInput.Default
