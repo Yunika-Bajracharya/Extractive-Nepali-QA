@@ -4,3 +4,8 @@ fastapi
 uvicorn[standard]
 python-multipart
 snowballstemmer
+pytesseract
+
+pdf2image
+
+python-dotenv

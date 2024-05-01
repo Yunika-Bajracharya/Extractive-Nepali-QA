@@ -30,3 +30,4 @@ archive.zip
 .DS_Store
 
 uploads/
+.env

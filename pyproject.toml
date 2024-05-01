@@ -18,6 +18,7 @@ python-multipart = "^0.0.9"
 bs4 = "^0.0.2"
 pdfminer = "^20191125"
 pdfminer-six = "^20231228"
+python-dotenv = "^1.0.1"
 
 
 [tool.poetry.group.dev.dependencies]
