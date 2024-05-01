@@ -201,3 +201,9 @@ h1 {
   text-align: left;
   color: black;
 }
+
+@media screen and (max-width: 768px) {
+  .container {
+    padding: 10px;
+  }
+}
