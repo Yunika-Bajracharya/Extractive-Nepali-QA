@@ -16,7 +16,7 @@ enum QuestionInput {
   NepaliTranliteration,
 }
 
-const API_ENDPOINT = "http://127.0.0.1:8000";
+  const API_ENDPOINT = import.meta.env.VITE_SERVER_URL || "http://127.0.0.1:8000";
 
 const QAComponent = () => {
   const [context, setContext] = useState<string>("");
