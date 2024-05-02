@@ -24,11 +24,12 @@ app = FastAPI()
 UPLOAD_DIR = Path() / "uploads"
 # docSearch.build_courpus_from_directory(UPLOAD_DIR)
 
-if not os.environ["ORIGIN"]:
-    allowed_origins = ["*"]
-else:
-    allowed_origins = [os.environ["ORIGIN"]]
+# if not os.environ["ORIGIN"]:
+#     allowed_origins = ["*"]
+# else:
+#     allowed_origins = [os.environ["ORIGIN"]]
 
+allowed_origins = ["*"]
 print(allowed_origins)
 app.add_middleware(
     CORSMiddleware,
