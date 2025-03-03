@@ -9,19 +9,19 @@ Recognizing the scarcity of dedicated Nepali datasets, the existing dataset is u
 
 <img src="https://github.com/Yunika-Bajracharya/Extractive-Nepali-QA/assets/60802409/8f0ab843-8986-4010-88d9-0bb664ea1a71" width="300">
 
-## 🔗 Datasets
+## Datasets
   - 📂 [SQuAD-Nepali & SQuAD-Hindi](https://huggingface.co/datasets/suban244/squad_v1.1_np)
   - 📂 [XQuAD-Nepali](https://huggingface.co/datasets/Yunika/xquad-nepali)
   - 📂 [Belebele-Based Nepali QA](https://huggingface.co/datasets/Yunika/Nepali-QA)
 
-## 📊 Model Performance
+## Model Performance
 
 | Model  | Dataset                 | Exact Match (EM) | F1 Score |
 |--------|-------------------------|------------------|----------|
 | **[MuRIL-Base-SQuAD-Nepali-Hindi](https://huggingface.co/Yunika/muril-base-squad-np-hi)** | **XQuAD-Nepali**  | 70.09 | 81.21 |
 |        | **XQuAD-Hindi**   | 60.76 | 76.59 |
 |        | **Belebele-Nepali** | 19.17 | 46.41 |
-| **[MuRIL-Large-SQuAD-Nepali-Hindi)](https://huggingface.co/Yunika/muril-large-squad-np-hi)** | **XQuAD-Nepali**  | 72.99 | 84.13 |
+| **[MuRIL-Large-SQuAD-Nepali-Hindi](https://huggingface.co/Yunika/muril-large-squad-np-hi)** | **XQuAD-Nepali**  | 72.99 | 84.13 |
 |        | **XQuAD-Hindi**   | 64.62 | 80.14 |
 |        | **Belebele-Nepali** | 21.80 | 50.51 |
 
