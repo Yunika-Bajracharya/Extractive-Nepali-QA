@@ -1,6 +1,6 @@
 # Extractive Nepali Question Answering System
 
-There is noticeable gap in language processing tools and resources for Nepali, a language spoken by millions yet significantly underrepresented in the field of computational linguistics. Understanding this gap, we have developed a web application and a browser extension that lets you ask questions in Nepali and get answers extracted from your documents or information on the web. Whether it’s students looking up facts for school or professionals searching for news and updates, our project aims to create easier access to information, thereby empowering Nepali speakers to thrive in the digital age.
+There is noticeable gap in language processing tools and resources for Nepali, a language spoken by millions yet significantly underrepresented in the field of computational linguistics. Understanding this gap, we have developed a Nepali extractive QA model, web application and a browser extension that lets you ask questions in Nepali and get answers extracted from your documents or information on the web. Whether it’s students looking up facts for school or professionals searching for news and updates, our project aims to create easier access to information in Nepali language.
 
 ## Publication
 DOI: [https://doi.org/10.3126/kjse.v9i1.78368](https://doi.org/10.3126/kjse.v9i1.78368)
